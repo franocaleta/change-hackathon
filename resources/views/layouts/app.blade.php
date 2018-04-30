@@ -43,7 +43,7 @@
                 <form class="navbar-form navbar-left" role="search" method="GET" action="/search">
                     <button type="submit" class="btn btn-default" style="position: absolute; left: -9999px"><span class="glyphicon glyphicon-search" aria-hidden="true">Pretraži</span></button>
                     <div class="form-group">
-                        <input type="text" class="form-control" name="query" placeholder="Pretraži">
+                        <input type="text" class="form-control" name="title" placeholder="Pretraži">
                     </div>
                 </form>
             </li>

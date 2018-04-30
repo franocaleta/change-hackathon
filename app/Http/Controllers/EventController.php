@@ -17,21 +17,33 @@ use Carbon\Carbon;
 
 class EventController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
+
     public function index()
     {
         $events = Event::latest()->where('isConfirmed', '=', 1)->get();
         #dd($events->first()->tags()->get() );
         #dd($events->first()->receiver()->first());
-        dd(Carbon::now()->format('m/d/Y'));
+        Carbon::setLocale('hr');
+        #dd(Carbon::now()->diffForHumans());
         return view('events', compact('events'));
     }
+
+
 
     public function search(Request $request)
     {
 
 
 
-        $tags = Tag::search($request->query)->paginate(9);;
+        $tags = Tag::search($request->title)->paginate(9);;
         #dd($tags->get());
 
         #$tags = Tag::paginate(6);
@@ -75,7 +87,18 @@ class EventController extends Controller
             $destinationPath = 'img/';
             $fileName = rand(11111, 99999) . '.' . $extension;  // renaming image
             Input::file('picture')->move($destinationPath, $fileName);
+            $day = request('day');
+            $year = request('year');
+            $month = request('month');
+            $day = 11;
+            $month = 12;
+            $year = 2018;
+            Carbon::setLocale('hr');
+            #dd(Carbon::parse('11/06/1990')->diffForHumans());
 
+           # dd(Carbon::now()->diffForHumans());
+
+            $date = (Carbon::parse(''.$day.'/'.$month.'/'.$year)->format('d/m/Y'));
             $event = Event::create([
                 'name' => request('name2'),
                 'creatorId' => auth()->id(),
@@ -85,7 +108,11 @@ class EventController extends Controller
                 'zipcode' => request('zipcode2'),
                 'country' => request('country2'),
                 'isConfirmed' => 0,
-                'picture' => $fileName
+                'picture' => $fileName,
+                'date' => $date
+                #'day' =>
+                #'year'=>request('year'),
+                #'month'=>request('month'),
 
                 //image
 

@@ -25,6 +25,7 @@ class CreateEventsTable extends Migration
             $table->string('country');
             $table->boolean('isConfirmed');
             $table->string('picture');
+            $table->string('date');
         });
 
         Schema::create('event_user', function (Blueprint $table) {

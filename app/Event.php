@@ -10,7 +10,7 @@ use Laravel\Scout\Searchable;
 class Event extends Model
 {
     protected $fillable = [
-        'name', 'creatorId', 'description', 'address', 'zipcode', 'city', 'country', 'isConfirmed','picture'
+        'name', 'creatorId', 'description', 'address', 'zipcode', 'city', 'country', 'isConfirmed','picture','date'
     ];
 
     use Searchable;
